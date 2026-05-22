@@ -1,0 +1,4 @@
+subject_id,age,gender,pregnant,visit1_date,visit2_date,bp
+SUB001,150,Male,Yes,2026-05-01,2026-04-01,
+SUB002,32,Female,No,2026-05-02,2026-05-15,120
+SUB003,,Female,Yes,invalid-date,2026-05-20,110
