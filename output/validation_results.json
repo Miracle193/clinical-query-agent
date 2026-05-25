@@ -1,0 +1,12 @@
+{
+    "SUB001": [
+        "Missing BP",
+        "Unrealistic Age",
+        "Visit 2 occurs before Visit 1",
+        "Invalid pregnancy status for male subject"
+    ],
+    "SUB003": [
+        "Missing Age",
+        "Invalid Visit 1 date"
+    ]
+}
