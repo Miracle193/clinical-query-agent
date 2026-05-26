@@ -1,0 +1,7 @@
+2026-05-26 18:45:28,995 | SUB001 | VAL-001 | Missing BP
+2026-05-26 18:47:39,639 | SUB001 | VAL-001 | Missing BP
+2026-05-26 18:47:39,639 | SUB001 | VAL-003 | Unrealistic Age
+2026-05-26 18:47:39,639 | SUB001 | VAL-004 | Visit 2 occurs before Visit 1
+2026-05-26 18:47:39,639 | SUB001 | VAL-005 | Invalid pregnancy status for male subject
+2026-05-26 18:47:39,640 | SUB003 | VAL-002 | Missing Age
+2026-05-26 18:47:39,640 | SUB003 | VAL-005 | Invalid Visit 1 date

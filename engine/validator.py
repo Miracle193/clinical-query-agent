@@ -1,6 +1,45 @@
+import os
+import logging
 import pandas as pd
+
 from dateutil.parser import parse
 from rules.validation_rules import RULES
+
+# Setup logging folder
+os.makedirs("logs", exist_ok=True)
+
+# Setup logging configuration
+logging.basicConfig(
+    filename="logs/validation.log",
+    level=logging.INFO,
+    format=(
+        "%(asctime)s | " \
+        "%(message)s"
+    )
+)
+
+# Helper Function for Structured Findings
+def create_issue(subject, rule):
+
+    # Create structured output
+    item = {
+        "subject_id": subject,
+        "rule_id": rule["rule_id"],
+        "issue": rule["message"],
+        "severity": rule["severity"],
+        "recommendation": rule["recommendation"]
+    }
+
+    # Write audit logs
+    logging.info(
+        f"{subject}"
+        f" | "
+        f"{rule['rule_id']}"
+        f" | "
+        f"{rule['message']}"
+    )
+
+    return item
 
 
 def is_valid_date(date):
@@ -25,22 +64,21 @@ def validate(df):
 
         # Missing checks
         if pd.isna(row["bp"]):
-            issues.append("Missing BP")
+            issues.append(create_issue(subject, RULES["MISSING_BP"]))
 
         if pd.isna(row["age"]):
-            issues.append("Missing Age")
+            issues.append(create_issue(subject, RULES["MISSING_AGE"]))
 
         # Range checks
         if pd.notna(row["age"]):
 
-            if row["age"] < RULES["age_min"] \
-               or row["age"] > RULES["age_max"]:
-
-                issues.append("Unrealistic Age")
+            if row["age"] < RULES["AGE_RANGE"]["age_min"] \
+               or row["age"] > RULES["AGE_RANGE"]["age_max"]:
+                issues.append(create_issue(subject, RULES["AGE_RANGE"]))
 
         # Date checks
         if not is_valid_date(row["visit1_date"]):
-            issues.append("Invalid Visit 1 date")
+            issues.append(create_issue(subject, RULES["INVALID_DATE"]))
 
         # Logical checks
         if (
@@ -53,9 +91,7 @@ def validate(df):
             visit2 = parse(row["visit2_date"])
 
             if visit2 < visit1:
-                issues.append(
-                    "Visit 2 occurs before Visit 1"
-                )
+                issues.append(create_issue(subject, RULES["VISIT_ORDER"]))
 
         # Cross-field checks
         if (
@@ -64,9 +100,7 @@ def validate(df):
             row["pregnant"] == "Yes"
         ):
 
-            issues.append(
-                "Invalid pregnancy status for male subject"
-            )
+            issues.append(create_issue(subject, RULES["PREGNANCY_CHECK"]))
 
         if issues:
             results[subject] = issues

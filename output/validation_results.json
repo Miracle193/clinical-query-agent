@@ -1,12 +1,48 @@
 {
     "SUB001": [
-        "Missing BP",
-        "Unrealistic Age",
-        "Visit 2 occurs before Visit 1",
-        "Invalid pregnancy status for male subject"
+        {
+            "subject_id": "SUB001",
+            "rule_id": "VAL-001",
+            "issue": "Missing BP",
+            "severity": "Medium",
+            "recommendation": "Please verify and enter blood pressure value."
+        },
+        {
+            "subject_id": "SUB001",
+            "rule_id": "VAL-003",
+            "issue": "Unrealistic Age",
+            "severity": "High",
+            "recommendation": "Verify subject age against source documents."
+        },
+        {
+            "subject_id": "SUB001",
+            "rule_id": "VAL-004",
+            "issue": "Visit 2 occurs before Visit 1",
+            "severity": "High",
+            "recommendation": "Confirm visit chronology."
+        },
+        {
+            "subject_id": "SUB001",
+            "rule_id": "VAL-005",
+            "issue": "Invalid pregnancy status for male subject",
+            "severity": "High",
+            "recommendation": "Review subject demographics."
+        }
     ],
     "SUB003": [
-        "Missing Age",
-        "Invalid Visit 1 date"
+        {
+            "subject_id": "SUB003",
+            "rule_id": "VAL-002",
+            "issue": "Missing Age",
+            "severity": "Medium",
+            "recommendation": "Please verify and enter age value."
+        },
+        {
+            "subject_id": "SUB003",
+            "rule_id": "VAL-005",
+            "issue": "Invalid Visit 1 date",
+            "severity": "Low",
+            "recommendation": "Correct date format."
+        }
     ]
 }
